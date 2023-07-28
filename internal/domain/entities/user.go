@@ -3,15 +3,15 @@ package entities
 import "time"
 
 type User struct {
-	Id        uint   `gorm:"primaryKey"`
-	Name      string `validate:"required,min=3"`
-	Surname   string `validate:"required,min=3"`
-	Phone     string `validate:"required,min=3"`
-	Email     string `validate:"required,email"`
-	Password  string `validate:"required,min=3"`
-	Token     string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	Id        uint      `json:"id" gorm:"primaryKey"`
+	Name      string    `json:"name" validate:"required,min=3"`
+	Surname   string    `json:"surname" validate:"required,min=3"`
+	Phone     string    `json:"phone" validate:"required,min=3"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password" validate:"required,min=3"`
+	Token     string    `json:"token"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 type UserLoginDto struct {

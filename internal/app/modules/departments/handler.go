@@ -1,8 +1,8 @@
 package departments
 
 import (
+	"template2/internal/common/response"
 	"template2/internal/domain/storage"
-	"template2/internal/utils"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
@@ -36,7 +36,7 @@ func (h *DepartmentHandlerImpl) GetAll(c *fiber.Ctx) error {
 	// 	"data": map[string]any{
 	// 		"departments": departments,
 	// 	}}
-	res := utils.Response{Status: true, Data: map[string]any{"departments": departments}}
+	res := response.Response{Status: true, Data: map[string]any{"departments": departments}}
 
 	return c.Status(fiber.StatusOK).JSON(res)
 }

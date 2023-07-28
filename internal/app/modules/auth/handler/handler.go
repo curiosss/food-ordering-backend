@@ -3,6 +3,7 @@ package auth
 import (
 	"fmt"
 	"strconv"
+	"template2/internal/common/translations"
 	"template2/internal/domain/entities"
 	"template2/internal/domain/services"
 	"template2/internal/domain/storage"
@@ -32,6 +33,15 @@ func NewAuthorization(service *services.Services, logger *logrus.Logger, storage
 }
 
 func (h *AuthorizationImpl) SignUp(c *fiber.Ctx) error {
+
+	headers := c.GetReqHeaders()
+	fmt.Println(headers)
+	fmt.Println(headers["Locale"])
+	locale := c.GetReqHeaders()["Locale"]
+	if locale == "" {
+		locale = "tk"
+	}
+
 	user := new(entities.User)
 	if err := c.BodyParser(user); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -65,7 +75,7 @@ func (h *AuthorizationImpl) SignUp(c *fiber.Ctx) error {
 	if dbUser != nil && dbUser.Id > 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"status":  false,
-			"message": "User with this phone number already exists",
+			"message": translations.GetText("userExists", locale),
 		})
 	}
 
