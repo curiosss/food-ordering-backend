@@ -4,12 +4,26 @@ import (
 	"fmt"
 	"template2/internal/domain/entities"
 
+	// _ "github.com/golang-migrate/migrate/v4/source/file"
+	// _ "github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
 func SyncDb(db *gorm.DB) error {
 	fmt.Println("syncing database")
-	return db.AutoMigrate(&entities.User{}, &entities.Department{})
+	return db.AutoMigrate(
+		&entities.User{},
+		&entities.Roles{},
+		&entities.UserRoles{},
+		&entities.Department{},
+	)
+	// dbb, err := sql.Open("postgres", "host=localhost user=postgres password=hellothere dbname=test_erp port=5432 sslmode=disable")
+	// driver, err := postgres.WithInstance(dbb, &postgres.Config{})
+	// m, err := migrate.NewWithDatabaseInstance(
+	// 	"file:///migrations",
+	// 	"postgres", driver)
+	// m.Up()
+	// return err
 }
 
 func SeedConstants(db *gorm.DB) {

@@ -13,3 +13,5 @@ func NewPostgresDB() (*gorm.DB, error) {
 	}
 	return db, nil
 }
+
+//   -database  "postgres://postgres:hellothere@localhost/test_erp?sslmode=disable"

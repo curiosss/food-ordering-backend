@@ -59,3 +59,19 @@ func main() {
 	fmt.Println(services)
 
 }
+
+func algo() {
+
+	var somedata []map[string]any
+	somedata = append(somedata, map[string]any{
+		"val":  33.0,
+		"name": "year",
+	})
+
+	ss, ok := somedata[0]["val"].(int)
+	if ok && ss > 0 {
+		fmt.Printf("%v this value is greater than 0\n", somedata[0]["val"])
+	}
+	fmt.Println("default case")
+
+}
